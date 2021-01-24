@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Media Emotions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="watch emotions on social media platforms right now">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="main.css" type="text/css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="side-nav">
+    <div class="out">
+        <span class="nav-icon fa fa-angle-left"></span>
+    </div>
+    <div class="content">
+        <header>
+            <h1>Social Media Emotions</h1>
+            <p class="sub-headline">see & hear what is happening on social media</p>
+        </header>
+        <section class="controls">
+            <p>show platforms</p>
+            <div class="form-row">
+                <input type="checkbox" id="4chan" checked><label for="4chan">4chan</label>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="twitter" checked><label for="twitter">twitter</label>
+            </div>
+        </section>
+        <section class="stats">
+            <div class="form-row">
+                <p>recent popular keywords: </p>
+                <p id="keyword">(nothing so far)</p>
+            </div>
+            <div class="form-row">
+                <p>overall emotion: </p>
+                <p id="emotion">neutral</p>
+            </div>
+        </section>
+        <section class="history">
+            <ul id="post-list">
+
+            </ul>
+        </section>
+    </div>
+</nav>
+<button id="muteButton" aria-label="currently muted, click to unmute" data-muted="true">
+    <i class="fa fa-volume-off"></i>
+</button>
+<div id="canvas"></div>
+<script src="main.js"></script>
+</body>
+</html>

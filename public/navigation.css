@@ -1,0 +1,81 @@
+nav.side-nav{
+    position: fixed;
+    left: 97vw;
+    top: 0;
+    width: 20vw;
+    height: 100vh;
+    background-color: #0d0d1f;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+    z-index: 100;
+    box-shadow: 0 0 10px 0 rgba(24,34,49,0.5);
+}
+
+nav.side-nav.active, nav.side-nav:hover{
+    left: 80vw;
+}
+
+nav.side-nav{
+    display: flex;
+    flex-direction: row;
+}
+
+nav.side-nav>.out{
+    width: 3vw;
+}
+
+nav.side-nav>.content{
+    width: 17vw;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+nav.side-nav .nav-icon{
+    padding: 1rem;
+    font-size: 2rem;
+}
+
+nav.side-nav:hover .nav-icon{
+    display: none;
+}
+
+nav.side-nav>.content>header, nav.side-nav .stats, nav.side-nav .controls{
+    margin-bottom: 1rem;
+    border-bottom: solid white thin;
+    padding-bottom: 1rem;
+}
+
+nav.side-nav .sub-headline{
+    font-size: 0.8rem;
+    text-transform: lowercase;
+    font-style: italic;
+}
+
+nav.side-nav .history>#post-list{
+    list-style: none;
+    width: 100%;
+    max-height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+nav.side-nav .history>#post-list li{
+    margin: 0.5rem 0;
+    border-bottom: solid white thin;
+}
+
+nav.side-nav .history>#post-list .content{
+
+}
+
+nav.side-nav .history>#post-list .meta{
+    font-size: 0.8rem;
+}
+
+input[type=checkbox]{
+    border: solid white 1px;
+    background-color: transparent;
+    margin-right: 1rem;
+}

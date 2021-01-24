@@ -1,0 +1,90 @@
+/******************* BACKGROUND EFFECTS ********************/
+
+.post .background{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.post .background .ripple, .post .background .point{
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    width: 10rem;
+    height: 10rem;
+}
+
+.post .background .ripple{
+    animation: ripple 2s ease-in-out forwards;
+}
+
+.post .background .point{
+    animation: glow 5s ease-in-out forwards;
+    top: -2.5rem;
+    left: 0;
+}
+
+.post.neutral .background .point{
+    background: radial-gradient(circle closest-side at 50%, rgba(102, 248, 255, 0.5), transparent);
+}
+
+.post.neutral .background .ripple{
+    border: solid rgba(102, 248, 255, 0.5) thin;
+}
+
+.post.positive .background .point{
+    background: radial-gradient(circle closest-side at 50%, rgba(40, 255, 51, 0.3), transparent);
+}
+
+.post.positive .background .ripple{
+    border: solid rgba(40, 255, 51, 0.3) thin;
+}
+
+.post.negative .background .point{
+    background: radial-gradient(circle closest-side at 50%, rgba(200,100,100,0.5), transparent);
+}
+
+.post.negative .background .ripple{
+    border: solid rgba(200,100,100,0.5) thin;
+}
+
+
+@keyframes ripple {
+    from {
+        border: solid white thin;
+        opacity: 1;
+        left: 5rem;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-radius: 0;
+    }
+
+    to {
+        border: solid white thin;
+        opacity: 0;
+        top: -2.5rem;
+        left: 0;
+        width: 10rem;
+        height: 10rem;
+        border-radius: 5rem;
+    }
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

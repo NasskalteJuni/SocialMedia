@@ -1,0 +1,7 @@
+**/credentials/
+**/node_modules/
+
+**/.idea/
+*.tmp
+*.swp
+*.private
