@@ -37,7 +37,7 @@ class EventStreams extends stream.Writable{
      * write event messages to all registered http connections
      * @param event
      * @param {String} [event.type="message"] what type of event is being sent, defaults to standard "message"-type
-     * @param {String}
+     * @param {String} message
      * */
     broadcast({type = "message", message}){
         if(typeof message !== "string"){

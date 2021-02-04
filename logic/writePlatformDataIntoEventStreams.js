@@ -19,11 +19,16 @@ module.exports = function writeDataToEventStreams(eventStreams){
                 let parts = startCommand.split(" ").filter(p => p.trim().length > 0);
                 let platformLiveData = spawn(parts[0], parts.slice(1), {cwd: workingDirectory});
 
+                platformLiveData.on('close', code => {
+                    if(code !== 0) process.stdout.write(`${platform} exiting with non-zero code ${platform}`);
+                });
+
                 platformLiveData.stdout.pipe(sentimentAnalyzer.stdin);
                 sentimentAnalyzer.stdout.pipe(eventStreams);
 
                 platformLiveData.stderr.on("data", d => console.error(d.toString()));
                 sentimentAnalyzer.stderr.on("data", d => console.error(d.toString()));
+
             }
         }else{
             console.warn(`starting without ${platform}, since no start.txt is present`);
