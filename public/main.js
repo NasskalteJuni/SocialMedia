@@ -1,3 +1,5 @@
+const IGNORE_KEYWORDS = ["twitter", "4chan"];
+
 let canvas = document.getElementById("canvas");
 let muteButton = document.getElementById("muteButton");
 let history = document.getElementById("post-list");
@@ -138,6 +140,7 @@ function addToHistory(post){
 function addToStats(post){
     stats[post.emotion]+=1;
     post.keywords.forEach(k => {
+        if(IGNORE_KEYWORDS.indexOf(k.toLowerCase()) >= 0) return;
         if(!stats.keywords[k]) stats.keywords[k] = {count: 0, score: 0};
         stats.keywords[k].count+=1;
         stats.keywords[k].score+=post.score;
