@@ -11,7 +11,7 @@ const matchesFilter = text => {
 
 client.start();
 client.on("post", post => {
-    if(filters.length >= 0 && !matchesFilter(post.originalText)) return;
+    if(filters.length > 0 && !matchesFilter(post.originalText)) return;
     process.stdout.write(JSON.stringify(post)+"\n")
 });
 
