@@ -3,6 +3,7 @@ const https = require("https");
 const requestTimeLimit = 1000;
 const boards = require("./boards.json");
 const minutesForPostBeingAcceptableAsNew = 1;
+const filters = ["vaccines"];
 
 const get = url => {
     return new Promise((resolve, reject) => {
@@ -58,6 +59,14 @@ const getRandomCurrentlyUpdatedThreadId = async board => {
     return isFresh(latestThread.last_modified) ? latestThread.no : null;
 };
 
+const matchesFilter = (text="") => {
+    if(filters.length){
+        return filters.reduce((matches, filter) => text.toLowerCase().indexOf(filter.toLowerCase()) >= 0 || matches, false);
+    }
+
+    return true;
+};
+
 const getLatestComments = async (board, threadId) => {
     let response = await get(`https://a.4cdn.org/${board}/thread/${threadId}.json`);
 
@@ -65,7 +74,7 @@ const getLatestComments = async (board, threadId) => {
 
     let posts = JSON.parse(response.body).posts;
 
-    return posts.filter(post => isFresh(post.time));
+    return posts.filter(post => isFresh(post.time)).filter(post => matchesFilter(post.com));
 };
 
 const processAndFormatPostText = text => {
@@ -117,6 +126,28 @@ const writeLatestCommentsOfBoardToStdout = async () => {
 
 // we are doing 2 requests, so we need 2 times the request time limit
 let poll = setInterval(writeLatestCommentsOfBoardToStdout, requestTimeLimit * 2);
+
+process.stdin.on('data', messages => {
+    messages.toString().split("\n").filter(line => line.trim().length > 0).forEach(async message => {
+        message = JSON.parse(message);
+        switch(message.type){
+            case "remove":
+                let i = filters.indexOf(message.value);
+                if(i >= 0) filters.splice(i, 1);
+                break;
+            case "add":
+                if(filters.indexOf(message.value) === -1) filters.push(message.value);
+                break;
+            case "clear":
+                filters.splice(0, filters.length);
+                break;
+            case "set":
+                filters.splice(0, filters.length);
+                filters.concat(messages.values);
+                break;
+        }
+    });
+});
 
 // clean up on exit
 process.on("exit", () => clearInterval(poll));
